@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<object name="portal_skins">
+
+  <object name="captchas"
+          meta_type="Filesystem Directory View"
+          directory="zojax.widget.captcha:skins/captchas" />
+  <object name="captcha_core"
+          meta_type="Filesystem Directory View"
+          directory="zojax.widget.captcha:skins/captcha_core" />
+
+  <skin-path name="*">
+    <layer name="captchas"
+           insert-after="custom" />
+    <layer name="captcha_core"
+           insert-after="custom" />
+    <layer name="captcha_core/static"
+           insert-after="custom" />
+    <layer name="captcha_core/dynamic" remove="True" />
+  </skin-path>
+
+</object>

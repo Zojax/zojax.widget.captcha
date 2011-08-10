@@ -1,0 +1,6 @@
+[validators]
+validators=
+
+[actions]
+action.success=redirect_to:string:prefs_captchas_setup_form
+action.failure=redirect_to:string:prefs_captchas_setup_form

@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<action-icons  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    i18n:domain="zojax.widget.captcha">
+ <action-icon category="controlpanel"
+              action_id="qpc_tool"
+              title="Quintagroup Captcha" priority="0"
+              icon_expr="./tool.gif" i18n:attributes="title" />
+</action-icons>

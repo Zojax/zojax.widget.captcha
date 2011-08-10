@@ -1,0 +1,6 @@
+[validators]
+validators = captcha_validator
+
+[actions]
+action.success = redirect_to:string:test_form
+action.failure = traverse_to:string:test_form

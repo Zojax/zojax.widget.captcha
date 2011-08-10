@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<import-steps>
+ <import-step id="zojax.widget.captcha_uninstall"
+              version="20090403-01"
+              handler="zojax.widget.captcha.setuphandlers.uninstall"
+              title="zojax.widget.captcha: uninstall steps.">
+    Uninstalls zojax.widget.captcha product.
+ </import-step>
+</import-steps>

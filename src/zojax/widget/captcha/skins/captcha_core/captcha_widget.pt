@@ -1,0 +1,25 @@
+<div metal:define-macro="captcha"
+     tal:omit-tag=""
+     i18n:domain="zojax.widget.captcha"
+     tal:define="portal_url here/plone_portal_state/portal_url">
+  <div class="field"
+       tal:define="hk here/getCaptcha;
+                   error errors/key|nothing"
+       tal:attributes="class python:error and 'field error' or 'field'">
+     <input type="hidden"
+            name="hashkey"
+            tal:attributes="value hk" />
+     <label i18n:translate="enter_word">Enter the word below</label>
+     <span class="fieldRequired" title="Required"
+           i18n:domain="plone" i18n:attributes="title title_required;"
+           i18n:translate="label_required">(Required)</span>
+     <div class="formHelp"></div>
+     <div tal:content="error">Validation error output</div>
+     <input type="text"
+            tabindex=""
+            name="key"
+            size="10"
+            value=""/>
+     <img tal:attributes="src string:${portal_url}/getCaptchaImage/${hk}" alt="Enter the word"/>
+  </div>
+</div>

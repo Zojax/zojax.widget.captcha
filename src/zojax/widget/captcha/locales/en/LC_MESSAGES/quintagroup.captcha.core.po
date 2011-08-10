@@ -1,0 +1,87 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2011-05-13 10:29+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: DOMAIN\n"
+
+#: ./skins/captcha_core/prefs_captchas_setup_form.cpt:149
+msgid "Amplitude"
+msgstr ""
+
+#: ./skins/captcha_core/prefs_captchas_setup_form.cpt:89
+msgid "Background"
+msgstr ""
+
+#: ./skins/captcha_core/prefs_captchas_setup.cpy:56
+msgid "Changes saved."
+msgstr ""
+
+#: ./skins/captcha_core/prefs_captchas_setup_form.cpt:109
+msgid "Font color"
+msgstr ""
+
+#: ./skins/captcha_core/prefs_captchas_setup_form.cpt:69
+msgid "Font size"
+msgstr ""
+
+#: ./skins/captcha_core/prefs_captchas_setup_form.cpt:129
+msgid "Period"
+msgstr ""
+
+#: ./skins/captcha_core/dynamic/captcha_validator.vpy:24
+#: ./skins/captcha_core/static/captcha_validator.vpy:26
+msgid "Please re-enter validation code."
+msgstr ""
+
+#: ./profiles/default/controlpanel.xml
+msgid "Plone captchas setup"
+msgstr ""
+
+#: ./profiles/default/actionicons.xml
+msgid "Quintagroup Captcha"
+msgstr ""
+
+#: ./skins/captcha_core/prefs_captchas_setup_form.cpt:170
+msgid "Random values"
+msgstr ""
+
+#. Default: "Enter the word below"
+#: ./skins/captcha_core/captcha_widget.pt:12
+msgid "enter_word"
+msgstr ""
+
+#. Default: "Plone Captchas Setup"
+#: ./skins/captcha_core/prefs_captchas_setup_form.cpt:18
+msgid "heading_comments_setup"
+msgstr ""
+
+#. Default: "Dynamic captchas image setup options"
+#: ./skins/captcha_core/prefs_captchas_setup_form.cpt:54
+msgid "legend_dynamic_captchas_options"
+msgstr ""
+
+#. Default: "Plone Captchas setup options"
+#: ./skins/captcha_core/prefs_captchas_setup_form.cpt:35
+msgid "legend_setup_options"
+msgstr ""
+
+#. Default: "Use dynamic captchas"
+#: ./skins/captcha_core/prefs_captchas_setup_form.cpt:49
+msgid "use_dynamic_captchas"
+msgstr ""
+
+#. Default: "Use static captchas"
+#: ./skins/captcha_core/prefs_captchas_setup_form.cpt:42
+msgid "use_static_captchas"
+msgstr ""
+

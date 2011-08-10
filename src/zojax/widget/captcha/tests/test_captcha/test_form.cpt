@@ -1,0 +1,16 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      metal:use-macro="here/main_template/macros/master">
+<body>
+<div metal:fill-slot="main" tal:define="errors options/state/getErrors;">
+    <div metal:use-macro="here/global_statusmessage/macros/portal_message" />
+    <form name="edit_form" method="post" action="talkback"
+          tal:attributes="action python:context.absolute_url()+'/'+template.id">
+        <div metal:use-macro="here/captcha_widget/macros/captcha"></div>
+        <input class="context" type="submit" value="Save" name="form.button.Save" />
+        <input type="hidden" name="form.submitted" value="1" />
+    </form>
+</div>
+</body>
+</html>

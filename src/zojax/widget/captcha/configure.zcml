@@ -1,0 +1,26 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="zojax.widget.captcha">
+
+  <i18n:registerTranslations directory="locales" />
+        
+  <!--Widget-->
+  <adapter
+    for=".field.Captcha
+         z3c.form.interfaces.IFormLayer"
+    factory=".widget.CaptchaWidgetFactory"
+    />
+
+  <!--Validators-->
+  <adapter
+    factory=".validator.CaptchaValidator"
+    />
+
+  <!--Custom Error Messages-->
+  <adapter
+    factory=".error.CaptchaFailureMessage"
+    name="message"
+    />
+
+</configure>
