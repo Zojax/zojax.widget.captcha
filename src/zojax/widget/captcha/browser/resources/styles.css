@@ -4,6 +4,7 @@
 
 div.zojax-widget-captcha-field {
 	display:inline-block;
+	margin-top: 10px;
 }
 
 div.zojax-widget-captcha-field img {
