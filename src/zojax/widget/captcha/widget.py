@@ -45,7 +45,7 @@ class CaptchaWidget(TextWidget):
             # Enforce template and do not query it from the widget template factory
             return ''
         self.value = ''
-        return u"""<div>
+        return u"""<div class="zojax-widget-captcha-field">
                    <input type="hidden" value="%(key)s" name="%(prefix)shashkey" />
                    <img src="%(img)s" alt="Enter the word"/>
                    <br/>
