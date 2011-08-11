@@ -6,4 +6,8 @@ div.zojax-widget-captcha-field {
 	display:inline-block;
 }
 
+div.zojax-widget-captcha-field img {
+	padding-bottom: 5px;
+}
+
 }
