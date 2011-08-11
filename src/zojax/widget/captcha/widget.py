@@ -45,13 +45,13 @@ class CaptchaWidget(TextWidget):
             # Enforce template and do not query it from the widget template factory
             return ''
         self.value = ''
-        return u"""<img src="%s" alt="Enter the word"/>
-                   <input type="hidden" value="%s" name="%shashkey" />
-                    %s
-                   """ % (key,
-                                                               self.form.prefix,
-                                                               super(CaptchaWidget, self).render(),
-                                                               image_url)
+        return u"""<img src="%(img)s" alt="Enter the word"/>
+                   <input type="hidden" value="%(key)s" name="%(prefix)shashkey" />
+                    %(widget)s
+                   """ % dict(key=key,
+                              prefix=self.form.prefix,
+                              widget=super(CaptchaWidget, self).render(),
+                              img=image_url)
         return super(CaptchaWidget, self).template(self) 
 
 
