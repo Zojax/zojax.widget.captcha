@@ -47,6 +47,7 @@ class CaptchaWidget(TextWidget):
         self.value = ''
         return u"""<img src="%(img)s" alt="Enter the word"/>
                    <input type="hidden" value="%(key)s" name="%(prefix)shashkey" />
+                   <br/>
                     %(widget)s
                    """ % dict(key=key,
                               prefix=self.form.prefix,
