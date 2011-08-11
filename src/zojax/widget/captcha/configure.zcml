@@ -1,9 +1,19 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:zojax="http://namespaces.zope.org/zojax"
     i18n_domain="zojax.widget.captcha">
 
   <i18n:registerTranslations directory="locales" />
+
+  <!--Configlet-->
+  <zojax:configlet
+    title="Captcha"
+    description="Captcha configuration"
+    schema=".interfaces.ICaptchaConfiglet"
+    class=".configlet.CaptchaConfiglet"
+    name="ui.captcha"
+    />
         
   <!--Widget-->
   <adapter
@@ -22,5 +32,7 @@
     factory=".error.CaptchaFailureMessage"
     name="message"
     />
+    
+  <include package=".browser" />
 
 </configure>

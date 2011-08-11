@@ -1,0 +1,52 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:zojax="http://namespaces.zope.org/zojax"
+   xmlns:browser="http://namespaces.zope.org/browser"
+   xmlns:z3c="http://namespaces.zope.org/z3c"
+   i18n_domain="zojax.widget.captcha">
+
+  <!-- portlets access -->
+  <adapter
+     name="getCaptchaImage"
+     for="* zope.publisher.interfaces.http.IHTTPRequest"
+     provides="zope.publisher.interfaces.IPublishTraverse"
+     factory=".captcha.GetCaptchaImage" />
+
+  <class class=".captcha.GetCaptchaImage">
+    <allow interface="zope.publisher.interfaces.IPublishTraverse" />
+  </class>
+  
+  <z3c:widgetTemplate
+      mode="input"
+      widget="..widget.CaptchaWidget"
+      layer="z3c.form.interfaces.IFormLayer"
+      template="captcha_input.pt"
+      />
+      
+  <zojax:resourcedirectory
+    name="zojax-widget-captcha"
+    directory="resources" />
+  
+  <!--   styles -->
+  <zojax:resourceinclude
+     name="zojax-widget-captcha.css"
+     library="zojax" type="stylesheet" path="zojax-widget-captcha/styles.css" filetype="zrt" />
+     
+
+<!-- 
+  styles
+  <zojax:resourceinclude
+     name="zojax.portlet.preview.js"
+     require="jquery"
+     library="zojax.portlet.preview" type="javascript" file="resources/preview.js" />
+
+  ecmascripts
+  <zojax:resourceinclude
+     name="resources/jquery.portlet.edit.js"
+     type="javascript"
+     library="zojax"
+     require="jquery-plugins"
+     file="resources/edit.js"
+     layer="..interfaces.IPortletEditLinksLayer" />
+ -->     
+</configure>

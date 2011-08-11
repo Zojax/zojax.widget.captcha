@@ -9,7 +9,7 @@ except ImportError:
 from string import atoi
 from random import randint
 
-from DateTime import DateTime
+from datetime import datetime
 
 from zojax.widget.captcha.data import basic_english
 #import zojax.widget.captcha configuration values
@@ -33,18 +33,11 @@ def getTransform(x, y, a, p, o):
 
 def gen_captcha(**kwargs):
     """Generate a captcha image"""
-    try:
-        from App import ImageFile
-        ImageFile
-    except ImportError:
-        import ImageFile
     from PIL import Image
     from PIL import ImageFont
     from PIL import ImageDraw
     import random
-    from PIL import ImageFile as pyImageFile
-    import sys
-    sys.modules['ImageFile'] = pyImageFile
+    from PIL import ImageFile
     from cStringIO import StringIO
 
     text = kwargs.get('text', None)
@@ -127,7 +120,6 @@ def gen_captcha(**kwargs):
     outFile.seek(0)
     src = outFile.read()
     size = len(src)
-    sys.modules['ImageFile'] = ImageFile
     return {'src': src, 'size': size}
 
 
@@ -156,7 +148,7 @@ def formKey(num):
     def normalize(s):
         return (not len(s) % 8 and s) or normalize(s + str(randint(0, 9)))
 
-    return normalize('%s_%i_' % (str(DateTime().timeTime()), num))
+    return normalize('%s_%i_' % (str(datetime.now()), num))
 
 
 def encrypt(key, s):

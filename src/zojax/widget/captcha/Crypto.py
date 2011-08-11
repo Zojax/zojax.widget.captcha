@@ -1,5 +1,5 @@
 # xor implementation with PyCrypto interface
-
+from itertools import izip, cycle
 
 def new(key):
     return Xor(key)
@@ -10,10 +10,7 @@ class Xor:
         self.__key = key
 
     def __xor(self, s):
-        res = ''
-        for i in range(len(s)):
-            res += chr(ord(s[i]) ^ ord(self.__key[i]))
-        return res
+        return ''.join(chr(ord(x) ^ ord(y)) for (x,y) in izip(s, cycle(self.__key)))
 
     def __normkey(self, s):
         self.__key = self.__key * (len(s) / len(self.__key))

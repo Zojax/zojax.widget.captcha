@@ -24,7 +24,7 @@ def read(*rnames):
 version='0'
 
 
-setup(name='zojax.widget.googlemap',
+setup(name='zojax.widget.captcha',
       version=version,
       description="Captcha field and widget for zojax. Based on quintagroup product for plone",
       long_description=(
