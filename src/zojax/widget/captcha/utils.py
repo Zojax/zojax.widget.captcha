@@ -1,6 +1,9 @@
 import os
+import sys
 import re
 import math
+import string
+import random
 try:
     import hashlib as md5
     md5.md5
@@ -14,13 +17,15 @@ from datetime import datetime
 from zojax.widget.captcha.data import basic_english
 #import zojax.widget.captcha configuration values
 from zojax.widget.captcha.config import (DEFAULT_IMAGE_SIZE, DEFAULT_BG,
-    DEFAULT_FONT_COLOR, DEFAULT_DISTORTION, CAPTCHAS_COUNT)
+    DEFAULT_FONT_COLOR, DEFAULT_DISTORTION, CAPTCHAS_COUNT, DEFAULT_NOISE)
 
 try:
     import Crypto.Cipher.DES as Crypto
     Crypto
 except ImportError:
     import Crypto
+    
+words = {}
 
 
 def encrypt1(s):
@@ -45,6 +50,7 @@ def gen_captcha(**kwargs):
     bkground = kwargs.get('bkground', DEFAULT_BG)
     font_color = kwargs.get('font_color', DEFAULT_FONT_COLOR)
     distortion = kwargs.get('distortion', DEFAULT_DISTORTION)
+    noise = kwargs.get('noise', DEFAULT_NOISE)
 
     period = distortion[0]
     amplitude = distortion[1]
@@ -113,33 +119,63 @@ def gen_captcha(**kwargs):
                  xRows[j][i + 1], yRows[j][i + 1]),
                 ))
 
-    img = image.transform(image.size, Image.MESH, mesh, Image.BILINEAR)
+    image = image.transform(image.size, Image.MESH, mesh, Image.BILINEAR)
+
+    draw = ImageDraw.Draw(image)
+
+    for item in range(0, (image.size[0]+image.size[1]) * noise / 100) :
+          draw.line(
+             (
+               (random.randint(0,image.size[0]),random.randint(0,image.size[1])),
+               (random.randint(0,image.size[0]),random.randint(0,image.size[1]))
+             ),
+             fill=(random.randint(0,255),random.randint(0,255),random.randint(0,255))
+          )
+
+    for item in range(0, image.size[0]*image.size[1]*noise/100) :
+      draw.point(
+        (random.randint(0,image.size[0]),random.randint(0,image.size[1])),
+        fill=(random.randint(0,255),random.randint(0,255),random.randint(0,255))
+      )
+    del draw
+
 
     # save the image to a file
-    img.save(outFile, format='jpeg')
+    image.save(outFile, format='jpeg')
     outFile.seek(0)
     src = outFile.read()
     size = len(src)
     return {'src': src, 'size': size}
 
+def random_string(letters=True, digits=True, length=30):
+    population = ''
+    if letters:
+        population += string.letters
+    if digits:
+        population += string.digits
+    chars = []
+    while length:
+        chars.extend(random.sample(population,1))
+        length -= 1
+    return "".join(chars)
 
-def getWord(index):
-    words = basic_english.words.split()
+def getWord(index, letters=True, digits=True, length=30):
+    if index in words:
+        res = words[index]
+        removeWord(index)
+        return res
+    words[index] = random_string(letters=letters, digits=digits, length=length)
     return words[index]
 
-
-def getIndex(word):
-    words = basic_english.words.split()
+def removeWord(index):
     try:
-        res = words.index(word)
-    except ValueError:
-        res = len(words) + 1
-    return res
-
+        del words[index]
+    except KeyError:
+        pass
 
 def getCaptchasCount(dynamic):
     if dynamic:
-        return len(basic_english.words.split())
+        return sys.maxint
     else:
         return CAPTCHAS_COUNT
 

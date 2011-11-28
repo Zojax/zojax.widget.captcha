@@ -23,6 +23,15 @@ class ICaptchaConfiglet(interface.Interface):
                        values=['static', 'dynamic'],
                        default='dynamic')
     
+    length = schema.Int(title=_(u'Captcha text length'),
+                             default=7, min=3)
+    
+    letters = schema.Bool(title=_(u'Use letters'),
+                                  default=True)
+    
+    digits = schema.Bool(title=_(u'Use digits'),
+                                  default=True)
+    
     imageSize = schema.Int(title=_(u"Image size"),
                            default=27)
     
@@ -37,6 +46,9 @@ class ICaptchaConfiglet(interface.Interface):
 
     amplitude = schema.Float(title=_(u"Amplitude"),
                            default=5.)
+
+    noise = schema.Int(title=_(u"Noise level"),
+                           default=5, min=0, max=100)
     
     randomParams = schema.Bool(title=_(u'Random params'),
                                   default=True)

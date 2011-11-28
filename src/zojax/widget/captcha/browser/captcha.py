@@ -51,7 +51,7 @@ class GetCaptchaImage(object):
             dk = decrypt(configlet.captchaKey, hk)
             key = parseKey(dk)['key']
             
-            text = getWord(int(key))
+            text = getWord(int(key), letters=configlet.letters, digits=configlet.digits, length=configlet.length)
             size = configlet.imageSize
             bkground = configlet.background
             font_color = configlet.fontColor
@@ -67,6 +67,7 @@ class GetCaptchaImage(object):
                 amplitude = configlet.amplitude
             
             kwargs['distortion'] = [period, amplitude, (0.0, 0.0)]
+            kwargs['noise'] = configlet.noise
             
             im = gen_captcha(**kwargs)
             request.response.setHeader('Content-Type', 'image/jpeg')
