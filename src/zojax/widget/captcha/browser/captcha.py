@@ -42,7 +42,7 @@ class GetCaptchaImage(object):
         self.__parent__ = self.context = context
         self.request = request
         self.configlet = getUtility(ICaptchaConfiglet)
-        
+
     def publishTraverse(self, request, name):
         context = self.context
         configlet = self.configlet
@@ -50,7 +50,7 @@ class GetCaptchaImage(object):
             hk = name
             dk = decrypt(configlet.captchaKey, hk)
             key = parseKey(dk)['key']
-            
+
             text = getWord(int(key), letters=configlet.letters, digits=configlet.digits, length=configlet.length)
             size = configlet.imageSize
             bkground = configlet.background
@@ -65,14 +65,17 @@ class GetCaptchaImage(object):
             else:
                 period = configlet.period
                 amplitude = configlet.amplitude
-            
+
             kwargs['distortion'] = [period, amplitude, (0.0, 0.0)]
             kwargs['noise'] = configlet.noise
-            
+
             im = gen_captcha(**kwargs)
             request.response.setHeader('Content-Type', 'image/jpeg')
             request.response.setHeader('Content-Length', im['size'])
             request.response.setHeader('Accept-Ranges', 'bytes')
+            request.response.setHeader('Pragma', 'no-cache')
+            request.response.setHeader('Cache-Control', 's-maxage=0, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0')
+            request.response.setHeader('Expires', 'Sun, 19 Nov 1978 05:00:00 GMT')
             return Image(im['src'])
         else:
             hk = name
