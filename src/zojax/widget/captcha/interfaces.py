@@ -19,9 +19,13 @@ class ICaptchaConfiglet(interface.Interface):
     captchaKey = schema.TextLine(title=_(u'Captcha key'),
                                   default=u'captcha_key')
     
-    type = RadioChoice(title=_(u'Captcha type'),
+    captchaType = RadioChoice(title=_(u'Captcha type'),
                        values=['static', 'dynamic'],
                        default='dynamic')
+
+    type = RadioChoice(title=_(u'Checking Type'),
+                values=['captcha', 'recaptcha'],
+                default='captcha')
     
     length = schema.Int(title=_(u'Captcha text length'),
                              default=7, min=3)
@@ -52,7 +56,11 @@ class ICaptchaConfiglet(interface.Interface):
     
     randomParams = schema.Bool(title=_(u'Random params'),
                                   default=True)
-    
+
+    recaptchaPublicKey = schema.TextLine(title=_(u'Recaptcha Pulic Key'))
+
+    recaptchaPrivateKey = schema.TextLine(title=_(u'Recaptcha Private Key'))
+
     records = interface.Attribute('Records')
     
     def has_key(key):

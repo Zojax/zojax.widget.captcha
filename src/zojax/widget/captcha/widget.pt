@@ -1,0 +1,3 @@
+<div class="zojax-widget-captcha-field">
+<tal:block replace="structure view/captchaImage" />
+</div>
