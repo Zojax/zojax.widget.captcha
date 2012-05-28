@@ -27,6 +27,10 @@
     factory=".validator.CaptchaValidator"
     />
 
+    <adapter
+        factory=".configlet.RecaptchaInfo"
+    />
+
   <!--Custom Error Messages-->
   <adapter
     factory=".error.CaptchaFailureMessage"
