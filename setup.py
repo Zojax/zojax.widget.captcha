@@ -57,6 +57,8 @@ setup(name='zojax.widget.captcha',
                           'zojax.resource',
                           'zojax.resourcepackage',
                           'zojax.skintool',
+                          'zojax.language',
+
                           'recaptcha-client',
                           ],
       extras_require = dict(test=['zope.app.testing',
