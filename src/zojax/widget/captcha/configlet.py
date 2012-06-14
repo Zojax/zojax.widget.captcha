@@ -8,12 +8,17 @@ from zope import schema
 from zope.interface.interface import Interface
 
 from interfaces import ICaptchaConfiglet
-import BTrees
 from zope.publisher.interfaces.browser import IBrowserRequest
+import logging
+
+
+logger = logging.getLogger('zojax.widget.captcha')
+
 
 class IRecaptchaInfo(Interface):
     error = schema.TextLine()
     verified = schema.Bool()
+
 
 class RecaptchaInfoAnnotation(object):
     implements(IRecaptchaInfo)
@@ -23,27 +28,13 @@ class RecaptchaInfoAnnotation(object):
         self.verified = False
 RecaptchaInfo = factory(RecaptchaInfoAnnotation)
 
+
 class CaptchaConfiglet(object):
     """configlet for captchas"""
 
     implements(ICaptchaConfiglet)
-    
-    family = BTrees.family32
-    
-    @property
-    def records(self):
-        data = self.data.get('records')
-        if data is None:
-            data = self.family.OO.BTree()
-            self.data['records'] = data
-        return data
-    
-    def addExpiredKey(self, key):
-        self.records[key] = key
-    
-    def has_key(self, key):
-        return self.records.has_key(key)
 
+    NOT_CONFIGURED_MESSAGE = 'No recaptcha public key configured. Go to path/to/site/settings to configure.'
 
     def get_image_tag(self, request):
         lang = getUtility(ISiteLanguage).language
@@ -56,7 +47,9 @@ class CaptchaConfiglet(object):
         """ % lang
 
         if not self.recaptchaPublicKey:
-            raise ValueError, 'No recaptcha public key configured. Go to path/to/site/@@recaptcha-settings to configure.'
+            logger.warning()
+            return "<p>%s<p>"%self.NOT_CONFIGURED_MESSAGE
+
         use_ssl = request['HTTPS'] == 'on'
         error = IRecaptchaInfo(request).error
         return options + displayhtml(self.recaptchaPublicKey, use_ssl=use_ssl, error=error)
@@ -70,7 +63,7 @@ class CaptchaConfiglet(object):
             return True
 
         if not self.recaptchaPrivateKey:
-            raise ValueError, 'No recaptcha private key configured. Go to path/to/site/@@recaptcha-settings to configure.'
+            raise ValueError(self.NOT_CONFIGURED_MESSAGE)
         challenge_field = request.get('recaptcha_challenge_field')
         response_field = request.get('recaptcha_response_field')
         remote_addr = request.get('HTTP_X_FORWARDED_FOR', '').split(',')[0]

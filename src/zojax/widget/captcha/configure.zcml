@@ -14,7 +14,7 @@
     class=".configlet.CaptchaConfiglet"
     name="ui.captcha"
     />
-        
+
   <!--Widget-->
   <adapter
     for=".field.Captcha
@@ -36,7 +36,5 @@
     factory=".error.CaptchaFailureMessage"
     name="message"
     />
-    
-  <include package=".browser" />
 
 </configure>

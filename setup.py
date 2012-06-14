@@ -26,7 +26,7 @@ version='0'
 
 setup(name='zojax.widget.captcha',
       version=version,
-      description="Captcha field and widget for zojax. Based on quintagroup product for plone",
+      description="Captcha field and widget for zojax.",
       long_description=(
           'Detailed Documentation\n' +
           '======================\n'
