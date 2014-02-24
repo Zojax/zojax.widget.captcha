@@ -1,0 +1,62 @@
+===============
+Checkbox Widget
+===============
+
+  >>> from zope.interface.verify import verifyClass
+  >>> from z3c.form import interfaces
+  >>> from zojax.widget.checkbox.widget import CheckboxWidget
+  >>> from zojax.widget.checkbox.interfaces import ICheckboxWidget, ITermItem
+  >>> from zojax.widget.captcha.widget import CaptchaWidget
+  >>> from zojax.widget.captcha.interfaces import ICaptchaConfiglet, ICaptchaField
+  >>> from zope.app.component.hooks import setSite
+  >>> from zope.publisher.browser import TestRequest
+  >>> from zope.security.management import endInteraction, newInteraction
+  >>> root = getRootFolder()
+  >>> setSite(root)
+
+
+  >>> verifyClass(interfaces.IWidget, CaptchaWidget)
+  True
+
+The widget can be instantiated only using the request:
+
+  >>> from z3c.form.testing import TestRequest
+  >>> request = TestRequest(environ={'HTTPS':'on'})
+
+  >>> widget = CaptchaWidget(request)
+
+Before rendering the widget, one has to set the name and id of the widget:
+
+  >>> widget.id = 'widget-id2'
+  >>> widget.name = 'widget.name2'
+
+We also need to register the template for at least the widget and request:
+
+  >>> from zope import component
+  >>> from zope.pagetemplate.interfaces import IPageTemplate
+  >>> from z3c.form.widget import WidgetTemplateFactory
+  >>> from zojax.widget.captcha.tests.tests import getPath
+
+  >>> component.provideAdapter(
+  ...     WidgetTemplateFactory(getPath('widget.pt'), 'text/html'),
+  ...     (None, None, None, None, interfaces.ITextWidget),
+  ...     IPageTemplate, name=interfaces.INPUT_MODE)
+
+If we render the widget we get an emtpy widget:
+
+  >>> print widget.render()
+    <div class="zojax-widget-captcha-field">
+            <script>
+            var RecaptchaOptions = {
+                lang: 'en'
+            };
+            </script>
+            <script type="text/javascript" src="https://www.google.com/recaptcha/api/challenge?k=..."></script>
+    <noscript>
+      <iframe src="https://www.google.com/recaptcha/api/noscript?k=6LfXutISAAAAANV5BL43MxP6JoRYJdmYv3_MU3N2" height="300" width="500" frameborder="0"></iframe><br />
+      <textarea name="recaptcha_challenge_field" rows="3" cols="40"></textarea>
+      <input type='hidden' name='recaptcha_response_field' value='manual_challenge' />
+    </noscript>
+    </div>
+
+  >>> setSite(None)

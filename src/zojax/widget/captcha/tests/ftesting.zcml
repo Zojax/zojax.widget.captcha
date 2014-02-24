@@ -1,0 +1,6 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   i18n_domain="zojax.widget.captcha">
+  <include package="zojax.autoinclude" file="meta.zcml" />
+  <includeAllDependencies package="zojax.widget.captcha" extras="test" />
+</configure>
