@@ -41,7 +41,8 @@ class CaptchaConfiglet(object):
         options = """
         <script>
         var RecaptchaOptions = {
-            lang: '%s'
+            lang: '%s',
+            theme: 'clean'
         };
         </script>
         """ % lang
