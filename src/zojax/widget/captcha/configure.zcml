@@ -12,29 +12,22 @@
     description="Captcha configuration"
     schema=".interfaces.ICaptchaConfiglet"
     class=".configlet.CaptchaConfiglet"
-    name="ui.captcha"
-    />
+    name="ui.captcha" />
 
   <!--Widget-->
   <adapter
     for=".field.Captcha
          z3c.form.interfaces.IFormLayer"
-    factory=".widget.CaptchaWidgetFactory"
-    />
+    factory=".widget.CaptchaWidgetFactory" />
 
   <!--Validators-->
-  <adapter
-    factory=".validator.CaptchaValidator"
-    />
+  <adapter factory=".validator.CaptchaValidator" />
 
-    <adapter
-        factory=".configlet.RecaptchaInfo"
-    />
+  <adapter factory=".configlet.RecaptchaInfo" />
 
   <!--Custom Error Messages-->
   <adapter
     factory=".error.CaptchaFailureMessage"
-    name="message"
-    />
+    name="message" />
 
 </configure>

@@ -1,17 +1,29 @@
-from zope.interface import implementer
-from z3c.pt.pagetemplate import ViewPageTemplateFile
-
-from z3c.form import interfaces
-from z3c.form import widget
-from z3c.form.browser.text import TextWidget
-import zope.component
-from zope.app.component.hooks import getSite
-from zope.traversing.browser.absoluteurl import absoluteURL
-
-from interfaces import ICaptchaConfiglet
+##############################################################################
+#
+# Copyright (c) 2009 Zope Foundation and Contributors.
+# All Rights Reserved.
+#
+# This software is subject to the provisions of the Zope Public License,
+# Version 2.1 (ZPL).  A copy of the ZPL should accompany this distribution.
+# THIS SOFTWARE IS PROVIDED "AS IS" AND ANY AND ALL EXPRESS OR IMPLIED
+# WARRANTIES ARE DISCLAIMED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF TITLE, MERCHANTABILITY, AGAINST INFRINGEMENT, AND FITNESS
+# FOR A PARTICULAR PURPOSE.
+#
+##############################################################################
+"""
+$Id$
+"""
 
 from zope.component import getUtility
+from zope.interface import implementer
+
+from z3c.form import interfaces, widget
+from z3c.form.browser.text import TextWidget
 from z3c.form.interfaces import DISPLAY_MODE, HIDDEN_MODE
+from z3c.pt.pagetemplate import ViewPageTemplateFile
+
+from interfaces import ICaptchaConfiglet
 
 
 class CaptchaWidget(TextWidget):
